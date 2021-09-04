@@ -48,10 +48,16 @@ class Internet {
     get exampleButton() { return $('.example button') }
     deletebutton(index) { return $(`#elements button:nth-child(${index}`) }
 
+    pageButton() { return $('#checkbox-example button') }
 
     get enableButton() { return $('#input-example button') }
     get inputEnabledField() { return $('#input-example input') }
 
+
+    clickPageButton(){
+        this.pageButton.waitForDispalyed();
+        this.pageButton.click();
+    }
 
     /**
      * Click Example button

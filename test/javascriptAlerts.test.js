@@ -3,7 +3,7 @@ const internetPage = require("../pages/internet.page");
 
 describe('Javascript Alerts', function() {
     it('should get the text of alert', () => {
-        browser.url(`${browser.options.baseUrl}javascript_alerts`)
+        browser.url(`${browser.options.baseUrl}/javascript_alerts`)
         browser.pause(5000);
         internetPage.clickJavascriptAlertButton(1);  
         assert.equal('I am a JS Alert', browser.getAlertText());

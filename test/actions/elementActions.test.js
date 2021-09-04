@@ -1,9 +1,12 @@
 const { expect, assert } = require("chai");
-const internetPage = require("../pages/internet.page");
+const logindata = require("../../data/logindata");
+const internetPage = require("../../pages/internet.page");
+loginData = require('../data/logindata');
 
 describe("Test element actions", () => {
-    it('Should click element', () => {
+    it.only('Should click element', () => {
         browser.url('/');
+        browser.pause(3000)
         internetPage.clickOnLink();
         expect(browser.getURL()).equals('httP/the-internet.herokuapp.com/abtest')
     })
@@ -24,16 +27,28 @@ describe("Test element actions", () => {
         expect(internetPage.checkBoxes(1).isSelected().equals(false));
     })
 
-    it('Should enter username', () => {
-        browser.url('${browser.options.baseurl}/login');
+    it.skip('Should enter username', () => {
+        browser.url(`${browser.options.baseurl}/login`);
         internetPage.enterUsername('Julia');
         assert.equals('Julia', internetPage.username.getValue());
     })
+
+    it('Should enter username', () => {
+        browser.url(`${browser.options.baseurl}/login`);
+        internetPage.enterUsername(loginData.username);
+        assert.equals(loginData.username, internetPage.username.getValue());
+    })
     
-    it('Should enter password', () => {
-        browser.url('${browser.options.baseurl}/login');
+    it.skip('Should enter password', () => {
+        browser.url(`${browser.options.baseurl}/login`);
         internetPage.enterPassword('Password');
         assert.equals('Password', internetPage.password.getValue());
+    })
+
+    it('Should enter password', () => {
+        browser.url(`${browser.options.baseurl}/login`);
+        internetPage.enterPassword(loginData.password);
+        assert.equals(loginData.password, internetPage.password.getValue());
     })
 
     it('Should clear value', () => {

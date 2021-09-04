@@ -3,7 +3,7 @@ const internetPage = require("../pages/internet.page");
 
 describe('Wait for Exist', function () {
     it('should wait until the delete button exisits', () => {
-        browser.url(`${browser.options.baseUrl}add_remove_elements/`)
+        browser.url(`${browser.options.baseUrl}/add_remove_elements/`)
         browser.pause(3000)
         internetPage.clickExampleButton()
         internetPage.deletebutton(1).waitForExist();
