@@ -1,10 +1,11 @@
-const url = require('./urls')
+/*const url = require('./urls')
 const ENV = process.env.ENV
 
 if(!ENV || !['qa','dev','staging'].includes(ENV)){
     console.log('Please use the following format when running the test script: ENV=qa|dev|staging');
     process.exit();
 }
+*/
 
 exports.config = {
     //
@@ -84,7 +85,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'trace',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:
@@ -108,8 +109,8 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    //baseUrl: 'http://the-internet.herokuapp.com',
-    baseUrl: url[process.env.ENV],
+    baseUrl: 'http://the-internet.herokuapp.com',
+    //baseUrl: url[process.env.ENV],
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,

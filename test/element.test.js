@@ -1,15 +1,11 @@
-// @ts-check
-
 const internetPage = require("../pages/internet.page")
-//import Internet from '../pages/internet.page'
 
 describe('Interacting with elements', () => {
-
     it("Get text for element", () => {
         browser.url('/');
         let text =  $("h2").getText();
         console.log(text);          
-        //await internetPage.getLiText();
+        internetPage.getLiText();
         internetPage.getSpecificElementText(3);
     })
 

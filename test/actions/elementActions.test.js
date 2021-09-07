@@ -1,14 +1,14 @@
 const { expect, assert } = require("chai");
-const logindata = require("../../data/logindata");
+const loginData = require("../../data/logindata");
 const internetPage = require("../../pages/internet.page");
-loginData = require('../data/logindata');
+//loginData = require('../data/logindata');
 
 describe("Test element actions", () => {
-    it.only('Should click element', () => {
+    it('Should click element', () => {
         browser.url('/');
-        browser.pause(3000)
+        browser.pause(2000)
         internetPage.clickOnLink();
-        expect(browser.getURL()).equals('httP/the-internet.herokuapp.com/abtest')
+        expect(browser.getUrl()).equals('http://the-internet.herokuapp.com/abtest')
     })
 
     it('Should get Text', () => {
@@ -19,44 +19,42 @@ describe("Test element actions", () => {
     it('Should click checkbox', () => {
         internetPage.clickLink(6);
         internetPage.clickCheckbox(1);
-        expect(internetPage.checkBoxes(1).isSelected().equals(true));
+        expect(internetPage.checkBoxes(1).isSelected()).equals(true);
     })
 
     it('Should uncheck checkbox', () => {
         internetPage.clickCheckbox(1);
-        expect(internetPage.checkBoxes(1).isSelected().equals(false));
+        expect(internetPage.checkBoxes(1).isSelected()).equals(false);
     })
 
     it.skip('Should enter username', () => {
-        browser.url(`${browser.options.baseurl}/login`);
+        browser.url(`${browser.options.baseUrl}/login`);
         internetPage.enterUsername('Julia');
-        assert.equals('Julia', internetPage.username.getValue());
+        assert.equal('Julia', internetPage.username.getValue());
     })
 
     it('Should enter username', () => {
-        browser.url(`${browser.options.baseurl}/login`);
+        browser.url(`${browser.options.baseUrl}/login`);
         internetPage.enterUsername(loginData.username);
-        assert.equals(loginData.username, internetPage.username.getValue());
+        assert.equal(loginData.username, internetPage.username.getValue());
     })
     
-    it.skip('Should enter password', () => {
-        browser.url(`${browser.options.baseurl}/login`);
+    it('Should enter password', () => {
+        browser.url(`${browser.options.baseUrl}/login`);
         internetPage.enterPassword('Password');
-        assert.equals('Password', internetPage.password.getValue());
+        assert.equal('Password', internetPage.password.getValue());
     })
 
-    it('Should enter password', () => {
-        browser.url(`${browser.options.baseurl}/login`);
+    it.skip('Should enter password', () => {
+        browser.url(`${browser.options.baseUrl}/login`);
         internetPage.enterPassword(loginData.password);
-        assert.equals(loginData.password, internetPage.password.getValue());
+        assert.equal(loginData.password, internetPage.password.getValue());
     })
 
     it('Should clear value', () => {
         internetPage.username.click();
         internetPage.username.clearValue();
-        assert.equals('', internetPage.username.getValue());
-
+        assert.equal('', internetPage.username.getValue());
     })
-
 
 })

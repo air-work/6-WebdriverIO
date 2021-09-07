@@ -1,25 +1,22 @@
-const { default: $ } = require("webdriverio/build/commands/browser/$")
-const { default: $$ } = require("webdriverio/build/commands/browser/$$")
-
 class Internet {
-    get pageHeader() { return $('.heading') }
+    get pageHeader() { return $('h1.heading') }
     get subHeading() { return $('h2') }
-    get h3Header() { return $('h3)') }
+    get h3Header() { return $('h3') }
     get pageFooter() { return $('#page-footer') }
     get parent() { return $('ul') }   
     get childElements() { return this.parent.$$('li') }
-    specificChildElement(index) { return this.parent.$('li:nth-child(${index})') }
+    specificChildElement(index) { return this.parent.$(`li:nth-child(${index})`) }
 
     get firstLink() { return $('ul li:nth-child(1) a') }
-    link(index) { return $('ul li:nth-child(${index}) a') }
+    link(index) { return $(`ul li:nth-child(${index}) a`) }
 
-    checkBoxes(index) {return $('#checkboxes input:nth-child(${index})') }
+    checkBoxes(index) {return $(`#checkboxes input:nth-child(${index})`) }
 
     get username() { return $('#username') }
     get password() { return $('#password') }
 
-    figures(index) { return $('.example .figure:nth-child(${index}) img') }
-    figureDetails(index) { return $('.example .figure:nth-child($[index]) .figcatpion') }
+    figures(index) { return $(`.example .figure:nth-child(${index}) img`) }
+    figureDetails(index) { return $(`.example .figure:nth-child(${index}) .figcaption h5`) }
 
     get target() { return $('.example #target') }
     get result() { return $('.example #result') }
@@ -27,35 +24,38 @@ class Internet {
     get hereLink() { return $('.example a') }
 
     get iframeBody() { return $('#tinymce') }
-    get iframe() { return $('#mceu_27 #mce_0_ifr') }
+    get iframe() { return $('#mce_0_ifr') }
 
     get columnA() { return $('#column-a') }
     get columnB() { return $('#column-b') }
 
-    get collumnAHeader() { return $('#column-a header') }
-    get collumnBHeader() { return $('#column-b header') }
+    get columnAHeader() { return $('#column-a header') }
+    get columnBHeader() { return $('#column-b header') }
 
     get draggable() { return $('#draggable') }
     get droppable() { return $('#droppable') }
     get dropppableParagraph() { return $('#droppable p') }
 
     get dropdownMenu() { return $('#dropdown') }
-    get dropdownMenuOption1() { return $(`#dropdown option:nth-child(2)`) }
-    get dropdownMenuOption2() { return $(`#dropdown option:nth-child(3)`) }
+    get dropdownMenuOption1() { return $('#dropdown option:nth-child(2)') }
+    get dropdownMenuOption2() { return $('#dropdown option:nth-child(3)') }
 
-    javascriptAlertButton(index) { return $(`.example li:nth-child(${index} button`) }
-
+    javascriptAlertButton(index) { return $(`.example li:nth-child(${index}) button`) }
+    
     get exampleButton() { return $('.example button') }
     deletebutton(index) { return $(`#elements button:nth-child(${index}`) }
 
-    pageButton() { return $('#checkbox-example button') }
+    get pageButton() { return $('#checkbox-example button') }
 
     get enableButton() { return $('#input-example button') }
     get inputEnabledField() { return $('#input-example input') }
 
 
-    clickPageButton(){
-        this.pageButton.waitForDispalyed();
+    /**
+     * Click the Page button
+     */
+    clickPageButton() {
+        this.pageButton.waitForDisplayed();
         this.pageButton.click();
     }
 
@@ -63,7 +63,7 @@ class Internet {
      * Click Example button
      */
     clickExampleButton() {
-        this.exampleButton.waitForDispalyed();
+        this.exampleButton.waitForDisplayed();
         this.exampleButton.click()
     }
 
@@ -72,10 +72,9 @@ class Internet {
      * @param {index} index index of button
      */
     clickDeleteButton(index){
-        this.deletebutton(index).waitForDispalyed();
+        this.deletebutton(index).waitForDisplayed();
         this.deletebutton(index).click();
     }
-
 
     /**
      * Click the Enable/Disabled Button
@@ -90,8 +89,8 @@ class Internet {
      * @param {Number} index the index of the element
      */
     clickJavascriptAlertButton(index) {
-        this.javascriptAlertButton(index).waitForDisplayed()
-        this.javascriptAlertButton(index).click()
+        this.javascriptAlertButton(index).waitForDisplayed();
+        this.javascriptAlertButton(index).click();
     }
     /**
      * Click drop down menu
@@ -112,11 +111,10 @@ class Internet {
         /**
      * Click option 2
      */
-         clickDropdownMenuOption2() {
-            this.dropdownMenuOption1.waitForDisplayed();
-            this.dropdownMenuOption1.click();
-        }
-
+    clickDropdownMenuOption2() {
+            this.dropdownMenuOption2.waitForDisplayed();
+            this.dropdownMenuOption2.click();
+    }
 
     /**
      * Drag and drop
@@ -139,19 +137,17 @@ class Internet {
      * @param {String} text the text to be enetered 
      */
     sendTextToBody(text){
-        this.iframeBody.waitforDisplayed();
+        this.iframeBody.waitForDisplayed();
         this.iframeBody.clearValue();
         this.iframeBody.click();
         this.iframeBody.keys(text);
-
     }
-
 
     /**
      * Clicks the "click here" link
      */
     clickHereLink(){
-        this.hereLink.waitForDispalyed();
+        this.hereLink.waitForDisplayed();
         this.hereLink.click();
     }
 
@@ -167,7 +163,7 @@ class Internet {
      * @param {String} text the keyboard text to enter
      */
     clickTarget(){
-        this.target.waitForDispalyed;
+        this.target.waitForDisplayed;
         this.target.click;
     }
 
@@ -177,7 +173,7 @@ class Internet {
      */
     sendKeysToTarget(text){
         let myTarget = this.target;
-        this.target.waitForDispalyed;
+        this.target.waitForDisplayed;
         //this.target.keys(text);
         myTarget.keys(text);
     }
@@ -186,28 +182,8 @@ class Internet {
      * Return the text of the return element
      */
     getResultText(){
-        this.target.waitForDispalyed();
+        this.target.waitForDisplayed();
         return this.result.getText();
-    }
-
-
-    /**
-     * Hovers over the specified image
-     * @param {Number} index the specific index of the image
-     */
-    hoveronFigure(index){
-
-        this.figures(index).waitForDispalyed()
-        this.figures(index).move(1,1)
-    }
-
-    /**
-     * Returns the text of the figure details
-     * @param {Number} index the index of the element
-     */
-    getHoverDetailsText(index){
-        this.getFigureDetailsText(index).waitForDispalyed()
-        return this.figureDetails(index).getText()
     }
 
     /**
@@ -216,27 +192,42 @@ class Internet {
      */
     hoverOnFigure(index){
         this.figures(index).waitForDisplayed();
-        this.figures(index).moveTo(1,1);        
+        this.figures(index).move(1,1);
+    }
 
+    /**
+     * Returns the text of the figure details
+     * @param {Number} index the index of the element
+     */
+    getHoverDetailsText(index){
+        this.getFigureDetailsText(index).waitForDisplayed()
+        return this.figureDetails(index).getText()
+    }
+
+    /**
+     * Hovers over the specified image
+     * @param {Number} index the specific index of the image
+     */
+    hoverOnFigure(index) {
+        this.figures(index).waitForDisplayed();
+        this.figures(index).moveTo(1,1);        
     }
 
     /**
      * Returns the text of the figure deetails
      * @param {Number} index the index of the element
      */
-    getFigureDetailsText(index){
-
+    getFigureDetailsText(index) {
         this.figureDetails(index).waitForDisplayed();
         return this.figureDetails(index).getText()
     }
-
 
     /**
      * Enter the unsername into the field
      * @param {string} text username to be entered
      */
     enterUsername(text) {
-        this.username.waitForDispalyed();
+        this.username.waitForDisplayed();
         this.username.setValue(text)
     }
 
@@ -245,10 +236,9 @@ class Internet {
      * @param {string} text password to be entered
      */
      enterPassword(text) {
-        this.this.password.waitForDispalyed();
+        this.password.waitForDisplayed();
         this.password.setValue(text)
     }
-
 
     /**
      * Clicks on the link based on the index provided
@@ -277,14 +267,12 @@ class Internet {
     }
 
     clickOnLink() {
-        if((this.firstLink.isDisplayed()) === true) {
+        if (this.firstLink.isDisplayed() === true) {
             this.firstLink.click();
         }
-        //browser.pause(5000);
         this.h3Header.waitForDisplayed();
     }
 
 }
 
 module.exports = new Internet()
-//export default new Internet()
